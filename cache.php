@@ -1,22 +1,27 @@
-<?php
-$current = (int)@$_REQUEST['num'] ?: 15;
-?><!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>FP Page cache test</title>
-    <meta name="author" content="Yuki Matsukura">
-  </head>
-  <body>
+<? xml version="1.0" encoding="Shift_JIS" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <title>キャッシュ容量検証</title>
+    </head>
+    <body>
+
 <h1>キャッシュテスト</h1>
 
 <ul>
-<li>This page is encoded with UTF-8. Please report if you have any difficulties reading following sentence.</li>
-<li>1枚50.9KBです。10枚表示されれば500KB以上のコンテンツを表示出来るであると判断する。</li>
+<li>1枚50.9KBです。10枚表示されれば500KB以上のコンテンツを表示出来るであると判断します。</li>
 <li>画像はブラウザにキャッシュされないようにURLをユニークに生成しています。</li>
 </ul>
 
 <h1>表示枚数変更</h1>
+
+<?php
+$current = (int)@$_REQUEST['num'] ?: 15;
+?>
+
+
 <form action="?" method="get">
 <select name="num">
 <?php foreach (range(1, 100) as $i) { ?>
@@ -31,7 +36,7 @@ $current = (int)@$_REQUEST['num'] ?: 15;
 <h1>サンプル画像</h1>
 <?php foreach (range(1, $current) as $i) { ?>
 <div><?= $i ?>枚目↓</div>
-<img src="images/out.png?<?php print time().'_'.mt_rand(0, 1000000); ?>">
+<img src="image.php?<?php print time().'_'.sprintf('%02d',$i).'_'.mt_rand(0, 1000000); ?>">
 <?php } ?>
 
   </body>
